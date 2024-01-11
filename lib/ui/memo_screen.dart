@@ -41,20 +41,20 @@ class _MemoScreenState extends State<MemoScreen> {
               width: double.infinity,
               height: double.infinity,
               color: selectedColor, // 화면 배경색을 선택한 색상으로 설정
-              child: const Column(
-                children: [
-                  Center(
-                    child: Text(
-                      '화면 색상 변경',
-                    ),
-                  ),
-                ],
-              ),
             ),
             Column(
               children: [
+                // 저장 버튼
+                AppBar(
+                  backgroundColor: Colors.transparent,
+                  title: Text(
+                    '메모 페이지',
+                  ),
+                  actions: [TextButton(child: Text('저장', style: TextStyle(fontSize: 20),), onPressed: () {})],
+                ),
+                // 색상 선택
                 Container(
-                  margin: const EdgeInsets.only(top: 30),
+                  margin: const EdgeInsets.only(top: 10, bottom: 10),
                   width: MediaQuery.of(context).size.width,
                   height: 60,
                   child: Align(
@@ -85,26 +85,43 @@ class _MemoScreenState extends State<MemoScreen> {
                     ),
                   ),
                 ),
-                TextField(
-                  controller: _titleTextController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(
-                        width: 1,
-                        color: Colors.black,
+                // 제목 작성
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    child: TextField(
+                      controller: _titleTextController,
+                      decoration: InputDecoration(
+                        hintText: '제목',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: const BorderSide(
+                            width: 2,
+                            color: Colors.black,
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
-                TextField(
-                  controller: _titleTextController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(
-                        width: 1,
-                        color: Colors.black,
+                // 내용 작성
+                Expanded(
+                  flex: 5,
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    child: TextField(
+                      maxLines: 10,
+                      controller: _memoTextController,
+                      decoration: InputDecoration(
+                        hintText: '내용을 입력하세요',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: const BorderSide(
+                            width: 1,
+                            color: Colors.black,
+                          ),
+                        ),
                       ),
                     ),
                   ),
