@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import '../data/model/memo_data.dart';
+import 'list_view_model.dart';
 
 class MemoScreen extends StatefulWidget {
   const MemoScreen({super.key});
@@ -47,10 +51,27 @@ class _MemoScreenState extends State<MemoScreen> {
                 // 저장 버튼
                 AppBar(
                   backgroundColor: Colors.transparent,
-                  title: Text(
-                    '메모 페이지',
+                  title: const Text(
+                    'MEMO PAGE',
                   ),
-                  actions: [TextButton(child: Text('저장', style: TextStyle(fontSize: 20),), onPressed: () {})],
+                  actions: [
+                    TextButton(
+                        child: const Text(
+                          'SAVE',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        onPressed: () {
+                          MemoData memoData = MemoData(
+                            title: _titleTextController.text,
+                            detail: _memoTextController.text,
+                            backgroundColorValue:
+                                selectedColor.value.toString(),
+                            createdTimeValue: DateTime.now().toIso8601String(),
+                          );
+                          ListViewModel.addToMemoList(memoData, context);
+                          context.go('/');
+                        })
+                  ],
                 ),
                 // 색상 선택
                 Container(
@@ -86,20 +107,17 @@ class _MemoScreenState extends State<MemoScreen> {
                   ),
                 ),
                 // 제목 작성
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    padding: const EdgeInsets.all(20),
-                    child: TextField(
-                      controller: _titleTextController,
-                      decoration: InputDecoration(
-                        hintText: '제목',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: const BorderSide(
-                            width: 2,
-                            color: Colors.black,
-                          ),
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  child: TextField(
+                    controller: _titleTextController,
+                    decoration: InputDecoration(
+                      hintText: 'TITLE',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Colors.black,
                         ),
                       ),
                     ),
@@ -107,14 +125,14 @@ class _MemoScreenState extends State<MemoScreen> {
                 ),
                 // 내용 작성
                 Expanded(
-                  flex: 5,
                   child: Container(
+                    height: double.infinity,
                     padding: const EdgeInsets.all(20),
                     child: TextField(
-                      maxLines: 10,
+                      maxLines: 15,
                       controller: _memoTextController,
                       decoration: InputDecoration(
-                        hintText: '내용을 입력하세요',
+                        hintText: 'PLEASE WRITE DETAILS HERE',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                           borderSide: const BorderSide(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../data/model/memo_data.dart';
 import '../data/repository/memo_repository.dart';
+import 'list_view_model.dart';
 import 'memo_card.dart';
 
 class ListScreen extends StatefulWidget {
@@ -21,14 +23,14 @@ class _ListScreenState extends State<ListScreen> {
   }
 
   void _loadMemos() async {
-    List<MemoData> memos = await MemoAddRemove.getMemoList();
+    List<MemoData> memos = await MemoRepository.getMemoList();
     setState(() {
       memoList = memos;
     });
   }
 
   void _removeFromMemos(MemoData item) async {
-    await MemoAddRemove.removeFromMemoList(item);
+    await ListViewModel.removeFromMemoList(item);
     // 삭제 후에는 다시 목록을 불러올 수 있도록 _loadFavorites 메서드 호출
     setState(() {
       _loadMemos();
@@ -44,12 +46,23 @@ class _ListScreenState extends State<ListScreen> {
           'MEMO LIST',
         ),
         actions: [
-          TextButton(
-              child: const Text(
-                '정렬',
-                style: TextStyle(fontSize: 20),
-              ),
-              onPressed: () {})
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: PopupMenuButton(
+              child: const Text('SORT'),
+              itemBuilder: (BuildContext context) => [
+                const PopupMenuItem(value: 1, child: Text("Ascend by DATE")),
+                const PopupMenuItem(value: 2, child: Text("Descend by DATE")),
+                const PopupMenuItem(value: 3, child: Text("Ascend by COLOR")),
+                const PopupMenuItem(value: 4, child: Text("Descend by COLOR")),
+                const PopupMenuItem(value: 5, child: Text("Ascend by TITLE")),
+                const PopupMenuItem(value: 6, child: Text("Descend by TITLE")),
+              ],
+              onSelected: (v) {
+                // 정렬하는 로직 만들기
+              },
+            ),
+          )
         ],
       ),
       body: Padding(
@@ -67,8 +80,14 @@ class _ListScreenState extends State<ListScreen> {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Colors.blueGrey,
+        label: const Text('NEW MEMO'),
+        icon: const Icon(
+          Icons.add,
+          size: 30,
+        ),
+        onPressed: () => context.go('/creatMemo'),
       ),
     );
   }

@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../data/model/memo_data.dart';
-import '../data/repository/memo_repository.dart';
-
-
+import 'list_view_model.dart';
 
 class MemoCard extends StatelessWidget {
-  const MemoCard(
-      {super.key, required this.memo, required this.onRemove});
+  const MemoCard({super.key, required this.memo, required this.onRemove});
 
   final MemoData memo;
   final VoidCallback onRemove;
@@ -64,17 +61,18 @@ class MemoCard extends StatelessWidget {
                 // ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
               icon: const Icon(
-                Icons.content_copy,
+                Icons.edit,
                 size: 25,
               )),
           IconButton(
               onPressed: () {
                 onRemove();
-                MemoAddRemove.removeFromMemoList(memo);
+                ListViewModel.removeFromMemoList(memo);
                 const snackBar = SnackBar(
-                  content:
-                  Text('삭제되었습니다.', style: TextStyle(fontFamily: 'Dohyeon')),
-                  duration: Duration(seconds: 1),
+                  content: Text(
+                    'DELETED!!.',
+                  ),
+                  duration: Duration(seconds: 2),
                 );
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
