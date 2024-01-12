@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:memo_app/routes.dart';
-import 'package:memo_app/ui/memo_screen.dart';
 
 void main() {
   runApp(const MyApp());

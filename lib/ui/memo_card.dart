@@ -52,13 +52,12 @@ class MemoCard extends StatelessWidget {
           IconButton(
               onPressed: () {
                 // 수정버튼 작성할 것
-                // copyToClipboard(favorite.firstString);
-                // const snackBar = SnackBar(
-                //   content: Text('클립보드에 복사되었습니다.',
-                //       style: TextStyle(fontFamily: 'Dohyeon')),
-                //   duration: Duration(seconds: 1),
-                // );
-                // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+
+
+
+
+
               },
               icon: const Icon(
                 Icons.edit,
