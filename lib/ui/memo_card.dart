@@ -53,32 +53,28 @@ class MemoCard extends StatelessWidget {
               onPressed: () {
                 // 수정버튼 작성할 것
 
-
-
-
-
-
               },
               icon: const Icon(
                 Icons.edit,
                 size: 25,
               )),
           IconButton(
-              onPressed: () {
-                onRemove();
-                ListViewModel.removeFromMemoList(memo);
-                const snackBar = SnackBar(
-                  content: Text(
-                    'DELETED!!.',
-                  ),
-                  duration: Duration(seconds: 2),
-                );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              },
-              icon: const Icon(
-                Icons.delete_outline_rounded,
-                size: 30,
-              ))
+            onPressed: () {
+              onRemove();
+              ListViewModel.removeFromMemoList(memo);
+              const snackBar = SnackBar(
+                content: Text(
+                  'DELETED!!.',
+                ),
+                duration: Duration(seconds: 2),
+              );
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            },
+            icon: const Icon(
+              Icons.delete_outline_rounded,
+              size: 30,
+            ),
+          )
         ],
       ),
     );

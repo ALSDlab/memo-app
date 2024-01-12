@@ -37,6 +37,27 @@ class _ListScreenState extends State<ListScreen> {
     });
   }
 
+  void _sort(int value) async {
+    // final timeList = memoList.map((e) => DateTime.parse(e.createdTimeValue).millisecondsSinceEpoch).toList();
+    switch(value) {
+      case 1:
+        memoList.sort((a, b) => a.createdTimeValue.compareTo(b.createdTimeValue));
+        // break;
+      case 2:
+        memoList.sort((a, b) => b.createdTimeValue.compareTo(a.createdTimeValue));
+      case 3:
+        memoList.sort((a, b) => a.backgroundColorValue.compareTo(b.backgroundColorValue));
+      case 4:
+        memoList.sort((a, b) => b.backgroundColorValue.compareTo(a.backgroundColorValue));
+      case 5:
+        memoList.sort((a, b) => a.title.compareTo(b.title));
+      case 6:
+        memoList.sort((a, b) => b.title.compareTo(a.title));
+      default:
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +81,7 @@ class _ListScreenState extends State<ListScreen> {
               ],
               onSelected: (v) {
                 // 정렬하는 로직 만들기
+                _sort(v);
               },
             ),
           )
