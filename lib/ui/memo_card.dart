@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../data/model/memo_data.dart';
@@ -53,6 +54,8 @@ class MemoCard extends StatelessWidget {
           IconButton(
               onPressed: () {
                 // 수정버튼 작성할 것
+                ListViewModel.removeFromMemoList(memo);
+                context.go('/updateMemo', extra: memo);
 
               },
               icon: const Icon(
