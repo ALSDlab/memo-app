@@ -50,6 +50,10 @@ class _MemoScreenState extends State<MemoScreen> {
               children: [
                 // 저장 버튼
                 AppBar(
+                  leading: IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    onPressed: () => context.go('/listMemo'),
+                  ),
                   backgroundColor: Colors.transparent,
                   title: const Text(
                     'MEMO PAGE',
@@ -69,7 +73,7 @@ class _MemoScreenState extends State<MemoScreen> {
                             createdTimeValue: DateTime.now().toIso8601String(),
                           );
                           ListViewModel.addToMemoList(memoData, context);
-                          context.go('/');
+                          context.go('/listMemo');
                         })
                   ],
                 ),
