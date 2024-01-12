@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../data/model/memo_data.dart';
 import 'list_view_model.dart';
@@ -34,8 +35,8 @@ class MemoCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  memo.createdTimeValue,
+                Text(DateFormat("yyyy년 MM월 dd일").format(DateTime.parse(memo.createdTimeValue))
+                  ,
                   style: const TextStyle(fontSize: 15, color: Colors.black),
                 ),
                 Text(
@@ -44,7 +45,7 @@ class MemoCard extends StatelessWidget {
                 ),
                 Text(
                   memo.detail,
-                  style: const TextStyle(fontSize: 13, color: Colors.grey),
+                  style: const TextStyle(fontSize: 13, color: Colors.black),
                 ),
               ],
             ),
