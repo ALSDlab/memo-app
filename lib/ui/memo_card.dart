@@ -36,7 +36,7 @@ class MemoCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(DateFormat("yyyy년 MM월 dd일").format(DateTime.parse(memo.createdTimeValue))
+                Text(DateFormat("yyyy년 MM월 dd일 HH:mm").format(DateTime.parse(memo.createdTimeValue))
                   ,
                   style: const TextStyle(fontSize: 15, color: Colors.black),
                 ),
@@ -68,7 +68,7 @@ class MemoCard extends StatelessWidget {
               ListViewModel.removeFromMemoList(memo);
               const snackBar = SnackBar(
                 content: Text(
-                  'DELETED!!.',
+                  'DELETED!!',
                 ),
                 duration: Duration(seconds: 2),
               );
