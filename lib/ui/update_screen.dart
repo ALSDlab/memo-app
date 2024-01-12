@@ -6,6 +6,7 @@ import 'list_view_model.dart';
 
 class UpdateScreen extends StatefulWidget {
   const UpdateScreen({super.key, required this.memo});
+
   final MemoData memo;
 
   @override
@@ -16,7 +17,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
   final _titleTextController = TextEditingController();
   final _memoTextController = TextEditingController();
   final List<ColorItem> colorData = [];
-  Color selectedColor = Color(int.parse(memo.backgroundColorValue));
+  Color selectedColor = Colors.white;
 
   @override
   void initState() {
@@ -27,6 +28,9 @@ class _UpdateScreenState extends State<UpdateScreen> {
     colorData.add(ColorItem(false, Colors.purpleAccent));
     colorData.add(ColorItem(false, Colors.orangeAccent));
     colorData.add(ColorItem(false, Colors.pinkAccent));
+    _titleTextController.text = widget.memo.title;
+    _memoTextController.text = widget.memo.detail;
+    selectedColor = Color(int.parse(widget.memo.backgroundColorValue));
   }
 
   @override
@@ -66,7 +70,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                             title: _titleTextController.text,
                             detail: _memoTextController.text,
                             backgroundColorValue:
-                            selectedColor.value.toString(),
+                                selectedColor.value.toString(),
                             createdTimeValue: DateTime.now().toIso8601String(),
                           );
                           ListViewModel.addToMemoList(memoData, context);
@@ -92,7 +96,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                           onTap: () {
                             setState(() {
                               colorData.forEach(
-                                      (element) => element.isSelected = false);
+                                  (element) => element.isSelected = false);
                               colorData[index].isSelected = true;
                               selectedColor = colorData[index].backgroundColor;
                             });
@@ -102,8 +106,8 @@ class _UpdateScreenState extends State<UpdateScreen> {
                       },
                       separatorBuilder: (BuildContext context, int index) =>
                           SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.05,
-                          ),
+                        width: MediaQuery.of(context).size.width * 0.05,
+                      ),
                     ),
                   ),
                 ),
