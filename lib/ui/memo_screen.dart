@@ -94,8 +94,9 @@ class _MemoScreenState extends State<MemoScreen> {
                           highlightColor: Colors.transparent,
                           onTap: () {
                             setState(() {
-                              colorData.forEach(
-                                  (element) => element.isSelected = false);
+                              for (var element in colorData) {
+                                element.isSelected = false;
+                              }
                               colorData[index].isSelected = true;
                               selectedColor = colorData[index].backgroundColor;
                             });

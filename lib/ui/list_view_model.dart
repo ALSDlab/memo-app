@@ -20,10 +20,14 @@ class ListViewModel {
       prefs.setString(MemoRepository.key, jsonString);
 
       // 정상적으로 추가된 경우 스낵바로 알림
-      memoAddSnackBar(context);
+      if (context.mounted) {
+        memoAddSnackBar(context);
+      }
     } else {
       // 수정된 경우 스낵바로 알림
-      modifySnackBar(context);
+      if (context.mounted) {
+        modifySnackBar(context);
+      }
     }
   }
 
@@ -53,7 +57,7 @@ class ListViewModel {
           jsonEncode(currentList.map((e) => e.toJson()).toList());
       prefs.setString(MemoRepository.key, jsonString);
     } catch (e) {
-      print('Error during removal: $e');
+      debugPrint('Error during removal: $e');
     }
   }
 }

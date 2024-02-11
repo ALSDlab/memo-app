@@ -74,7 +74,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                             createdTimeValue: DateTime.now().toIso8601String(),
                           );
                           ListViewModel.addToMemoList(memoData, context);
-                          context.go('/');
+                          context.go('/listMemo');
                         })
                   ],
                 ),
@@ -95,8 +95,9 @@ class _UpdateScreenState extends State<UpdateScreen> {
                           highlightColor: Colors.transparent,
                           onTap: () {
                             setState(() {
-                              colorData.forEach(
-                                  (element) => element.isSelected = false);
+                              for (var element in colorData) {
+                                element.isSelected = false;
+                              }
                               colorData[index].isSelected = true;
                               selectedColor = colorData[index].backgroundColor;
                             });
